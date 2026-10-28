@@ -165,7 +165,7 @@ def answer(question: str, index: Index, contact_hint: str = "") -> dict:
     hits = index.search(question)
     nothing_specific_matched = bool(specific) and len(unknown) == len(specific)
     if not hits or hits[0][0] < MIN_SCORE or nothing_specific_matched:
-        msg = "I don't have that on Roma's resume, so I won't guess."
+        msg = "I don’t have verified information about that on Roma’s resume"
         if contact_hint:
             msg += f" You can ask her directly: {contact_hint}"
         return {"answer": msg, "sources": [], "grounded": False}
