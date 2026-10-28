@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ r.profile.name }} | {{ r.profile.target_role }}</title>
+  <meta name="description" content="{{ r.profile.summary }}">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,wght@0,400;0,500;1,400;1,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+  <div class="progress" id="progress"></div>
+  {% set parts = r.profile.name.split(' ', 1) %}
+  <nav class="nav wrap">
+    <span class="logo">{{ parts[0][0] }}{{ parts[1][0] if parts|length > 1 else '' }}</span>
+    <div class="links">
+      <a href="#projects">Projects</a><a href="#experience">Experience</a>
+      <a href="#skills">Skills</a><a href="#education">Education</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap hero-grid">
+      <div class="hero-text">
+        <p class="kicker">Career dossier</p>
+        <h1>{{ parts[0] }} {% if parts|length > 1 %}<em>{{ parts[1] }}</em>{% endif %}</h1>
+        <p class="role">{{ r.profile.target_role }}</p>
+        <p class="lead">{{ r.profile.headline }}.</p>
+        <p class="sub">{{ r.profile.summary }}</p>
+        <div class="actions">
+          {% if has_pdf %}<a class="btn primary" href="{{ url_for('download') }}">Download resume</a>{% endif %}
+          {% if r.profile.email %}<a class="btn" href="mailto:{{ r.profile.email }}">Get in touch</a>{% endif %}
+          {% if r.profile.links and r.profile.links.linkedin %}<a class="btn" href="{{ r.profile.links.linkedin }}" target="_blank" rel="noopener">LinkedIn</a>{% endif %}
+          {% if r.profile.links and r.profile.links.github %}<a class="btn" href="{{ r.profile.links.github }}" target="_blank" rel="noopener">GitHub</a>{% endif %}
+          <button class="btn" type="button" data-open-chat>Ask my assistant</button>
+        </div>
+      </div>
+
+      <aside class="console tilt" aria-label="Profile as an API response">
+        <div class="console-bar"><i></i><i></i><i></i><span>GET /roma</span><b>200 OK</b></div>
+        <pre><code><span class="ln" style="--i:0">{</span>
+<span class="ln" style="--i:1">  <span class="k">"name"</span>: <span class="s">{{ r.profile.name | tojson }}</span>,</span>
+<span class="ln" style="--i:2">  <span class="k">"role"</span>: <span class="s">{{ r.profile.target_role | tojson }}</span>,</span>
+{% if r.skills.Backend %}<span class="ln" style="--i:3">  <span class="k">"stack"</span>: <span class="s">{{ r.skills.Backend | tojson }}</span>,</span>
+{% endif %}{% if r.skills.Security %}<span class="ln" style="--i:4">  <span class="k">"auth"</span>: <span class="s">{{ r.skills.Security | tojson }}</span>,</span>
+{% endif %}{% if r.skills.Data %}<span class="ln" style="--i:5">  <span class="k">"data"</span>: <span class="s">{{ r.skills.Data | tojson }}</span>,</span>
+{% endif %}{% if r.languages %}<span class="ln" style="--i:6">  <span class="k">"languages"</span>: <span class="s">{{ r.languages | tojson }}</span></span>
+{% endif %}<span class="ln" style="--i:7">}<span class="caret"></span></span></code></pre>
+      </aside>
+    </div>
+  </header>
+
+  <main class="wrap">
+    <section id="remember" class="reveal">
+      <h2>Three things to <em>remember</em></h2>
+      <div class="three">
+        {% for item in r.remember %}
+        <div class="num-card glow"><span>{{ loop.index }}</span><p>{{ item }}</p></div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="projects" class="reveal">
+      <h2>Projects that <em>prove it</em></h2>
+      <div class="cards">
+        {% for p in r.projects %}
+        <article class="card glow">
+          <h3>{{ p.name }}</h3>
+          <p>{{ p.summary }}</p>
+          {% if p.points %}<ul>{% for pt in p.points %}<li>{{ pt }}</li>{% endfor %}</ul>{% endif %}
+          <p class="tags">{% for s in p.stack %}<span>{{ s }}</span>{% endfor %}</p>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="experience" class="reveal">
+      <h2>Where I've <em>worked</em></h2>
+      <div class="timeline">
+        {% for e in r.experience %}
+        <article class="job">
+          <h3>{{ e.title }}</h3>
+          <p class="company">{{ e.company }}{% if e.period %} · {{ e.period }}{% endif %}</p>
+          <ul>{% for pt in e.points %}<li>{{ pt }}</li>{% endfor %}</ul>
+        </article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="skills" class="reveal">
+      <h2>Tools I <em>use</em></h2>
+      <div class="skills">
+        {% for group, items in r.skills.items() %}
+        <div class="skill-group glow"><h3>{{ group }}</h3><p class="tags">{% for s in items %}<span>{{ s }}</span>{% endfor %}</p></div>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section id="education" class="reveal">
+      <h2>Education</h2>
+      <div class="cards">
+        {% for ed in r.education %}
+        <article class="card glow"><h3>{{ ed.degree }}</h3><p>{{ ed.school }}{% if ed.year %} · {{ ed.year }}{% endif %}</p></article>
+        {% endfor %}
+      </div>
+    </section>
+
+    <section class="cta reveal">
+      <h2>Have a question? <em>Ask the assistant.</em></h2>
+      <p>It answers only from my approved resume and tells you when it doesn't know.</p>
+      <button class="btn primary" type="button" data-open-chat>Open chat</button>
+    </section>
+  </main>
+
+  <button id="chat-toggle" class="chat-toggle" aria-expanded="false">Ask about {{ parts[0] }}</button>
+  <div id="chat" class="chat" hidden>
+    <div class="chat-head">Ask about {{ parts[0] }} <small>Answers come only from her approved resume</small></div>
+    <div id="log" class="log" aria-live="polite"></div>
+    <div class="chips">
+      <button>What does Roma build?</button>
+      <button>Which skills does she have?</button>
+      <button>Where did she study?</button>
+    </div>
+    <form id="form">
+      <input id="q" type="text" maxlength="300" placeholder="Ask a question..." autocomplete="off" required>
+      <button class="btn primary" type="submit">Send</button>
+    </form>
+  </div>
+
+  <footer class="wrap foot">
+    <p>Every statement on this page comes from a resume file its owner has checked. The chat assistant cannot add anything beyond it.</p>
+  </footer>
+  <script src="{{ url_for('static', filename='chat.js') }}"></script>
+  <script src="{{ url_for('static', filename='fx.js') }}"></script>
+</body>
+</html>

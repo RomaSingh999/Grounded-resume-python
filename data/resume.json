@@ -1,0 +1,97 @@
+{
+  "_note": "Single source of truth. Anything starting with TODO is hidden from the site and the chat until you replace it with a verified fact.",
+  "profile": {
+    "name": "Roma Singh",
+    "headline": "Python Backend Developer for warehouse and logistics systems",
+    "target_role": "Python Backend Developer",
+    "summary": "I build backend systems in Python: REST APIs, authentication, databases and data pipelines, with a focus on warehouse and logistics software.",
+    "location": "TODO: city, country",
+    "email": "TODO: public contact email",
+    "links": {
+      "linkedin": "TODO: LinkedIn URL",
+      "github": "TODO: GitHub URL"
+    },
+    "resume_pdf": "Roma_Singh_Resume.pdf"
+  },
+  "remember": [
+    "Python backend developer with a warehouse and logistics focus",
+    "Builds REST APIs with Flask and FastAPI, with JWT authentication and role-based access control",
+    "MCA graduate who has worked as a Python Developer and as a Data Research Associate"
+  ],
+  "experience": [
+    {
+      "id": "exp-ynv",
+      "company": "YNV Technologies",
+      "title": "Python Developer",
+      "period": "TODO: start date to June 2026",
+      "points": [
+        "Worked as a Python Developer at YNV Technologies until June 2026.",
+        "TODO: one concrete thing you built here (what, for whom, which tools).",
+        "TODO: one result you can prove (a number, a shipped feature, a problem you fixed)."
+      ]
+    },
+    {
+      "id": "exp-precise",
+      "company": "Precise Research Solution",
+      "title": "Data Research Associate",
+      "period": "TODO: dates",
+      "points": [
+        "Worked as a Data Research Associate at Precise Research Solution.",
+        "TODO: what data work you did and what it was used for."
+      ]
+    }
+  ],
+  "projects": [
+    {
+      "id": "proj-amrutam",
+      "name": "Amrutam Telemedicine Backend",
+      "stack": ["Python", "FastAPI"],
+      "summary": "A telemedicine backend built with Python and FastAPI.",
+      "points": [
+        "TODO: what the API does (for example appointments, patients, doctors).",
+        "TODO: your part in it, and anything measurable."
+      ]
+    },
+    {
+      "id": "proj-warehouse",
+      "name": "Warehouse and Logistics Systems",
+      "stack": ["Python", "Flask", "MySQL", "Tesseract OCR", "CustomTkinter"],
+      "summary": "Backend and tooling work in warehouse and logistics technology.",
+      "points": [
+        "TODO: name one real warehouse or logistics project and describe it in one line.",
+        "TODO: how OCR, the desktop UI or the database was used in it."
+      ]
+    }
+  ],
+  "skills": {
+    "Backend": ["Python", "Flask", "FastAPI", "REST APIs"],
+    "Security": ["JWT authentication", "Role-based access control (RBAC)"],
+    "Data": ["MySQL", "Tesseract OCR"],
+    "Tools": ["Git", "GitHub", "CustomTkinter"]
+  },
+  "education": [
+    {
+      "id": "edu-mca",
+      "degree": "Master of Computer Applications (MCA)",
+      "school": "Chandigarh University",
+      "year": "TODO: year"
+    },
+    {
+      "id": "edu-bca",
+      "degree": "Bachelor of Computer Applications (BCA)",
+      "school": "Magadh University",
+      "year": "TODO: year"
+    }
+  ],
+  "languages": ["Hindi", "English", "Bengali"],
+  "faq": [
+    {
+      "q": "What kind of role is Roma looking for?",
+      "a": "Python Backend Developer and related IT roles."
+    },
+    {
+      "q": "Is Roma available right now?",
+      "a": "Roma's last role at YNV Technologies ended in June 2026. For her exact start date, please contact her directly."
+    }
+  ]
+}
